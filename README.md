@@ -4,7 +4,7 @@
 ## 一、环境依赖
 - ROS Noetic
 - Ubuntu 20.04
-- 依赖库：actionlib, actionlib_msgs
+- 依赖库：actionlib, actionlib_msgs，std_msgs
 
 ## 二、快速启动指南
 
