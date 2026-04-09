@@ -1,0 +1,14 @@
+<launch>
+  <!-- 启动 Gazebo 空世界 -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+
+  <!-- 加载机器人模型（xacro 文件需要用 xacro 命令解析） -->
+  <param name="robot_description" command="$(find xacro)/xacro $(find lzy_robot_description)/urdf/two_wheel_robot.xacro"/>
+
+  <!-- 机器人状态发布 -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <!-- 在 Gazebo 中生成小车 -->
+  <node name="spawn" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -param robot_description -model two_wheel_robot -z 0.1"/>
+</launch>
