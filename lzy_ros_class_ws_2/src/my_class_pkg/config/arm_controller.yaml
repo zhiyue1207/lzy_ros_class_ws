@@ -1,0 +1,31 @@
+# 大臂：位置控制
+arm_controller:
+  type: position_controllers/JointGroupPositionController
+  joints:
+    - joint_1
+    - joint_2
+    - joint_3
+    - joint_4
+    - joint_5
+
+# 夹爪：独立位置控制（带限位，不会乱转）
+claw_controller:
+  type: position_controllers/JointGroupPositionController
+  joints:
+    - claw_joint_1
+    - claw_joint_2
+  constraints:
+    goal_time: 0.5
+    stopped_velocity_tolerance: 0.01
+
+# 全局PID（彻底解决抖动/乱转）
+gazebo_ros_control:
+  pid_gains:
+    joint_1: {p: 8.0, i: 0.0, d: 0.5}
+    joint_2: {p: 8.0, i: 0.0, d: 0.5}
+    joint_3: {p: 8.0, i: 0.0, d: 0.5}
+    joint_4: {p: 8.0, i: 0.0, d: 0.5}
+    joint_5: {p: 8.0, i: 0.0, d: 0.5}
+    # 夹爪超稳PID，彻底杜绝自转
+    claw_joint_1: {p: 0.5, i: 0.0, d: 0.0}
+    claw_joint_2: {p: 0.5, i: 0.0, d: 0.0}
