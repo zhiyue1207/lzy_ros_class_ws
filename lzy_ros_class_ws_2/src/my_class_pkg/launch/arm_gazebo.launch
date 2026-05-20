@@ -1,0 +1,20 @@
+<launch>
+  <arg name="gui" default="true"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+  <param name="robot_description" command="xacro $(find lzy_robot_description)/urdf/arm.xacro"/>
+
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="-param robot_description -urdf -model arm -z 0"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <rosparam file="$(find lzy_robot_description)/config/arm_controller.yaml" command="load"/>
+
+  <!-- 同时加载大臂+夹爪控制器 -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner"
+        args="arm_controller claw_controller --shutdown-timeout 1"/>
+</launch>
