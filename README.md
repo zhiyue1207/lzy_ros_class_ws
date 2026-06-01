@@ -1,3 +1,5 @@
+完整版见branch_qimo_test
+
 # lzy_ros_class_ws
 本仓库包含课堂实验 ROS 工程，包含话题通信、服务通信、Action 动作库及多传感器避障功能。
 
